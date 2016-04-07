@@ -3,7 +3,7 @@ package conndb;
 import java.sql.SQLException;
 
 public class Exapleconn {
-
+/*
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
 
@@ -13,4 +13,5 @@ public class Exapleconn {
         ConnectDB.ReadDB();
         ConnectDB.CloseDB();
     }
+    */
 }
