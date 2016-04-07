@@ -8,7 +8,7 @@ public class Exapleconn {
 
 
        ConnectDB.Connect();
-       // ConnectDB.CreateDB();
+       ConnectDB.CreateDB();
        // ConnectDB.WriteDB();
         ConnectDB.ReadDB();
         ConnectDB.CloseDB();

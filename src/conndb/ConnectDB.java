@@ -22,8 +22,8 @@ public class ConnectDB {
         // --------ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ--------
         Driver driver = (Driver)Class.forName("org.sqlite.JDBC").newInstance();
 
-        String url = "jdbc:sqlite:d:\\sql\\Java\\DataBase\\Testdb";
-        //String url = "jdbc:sqlite:Testdb";
+        //String url = "jdbc:sqlite:d:\\sql\\Java\\DataBase\\Testdb";
+        String url = "jdbc:sqlite:Testdb";
         //d:\sql\Java\DataBase\
 
         conn = DriverManager.getConnection(url);
