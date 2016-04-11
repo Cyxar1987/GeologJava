@@ -1,6 +1,8 @@
 package gui;
 
 
+import sun.awt.AWTAccessor;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -84,13 +86,17 @@ public class MyTree extends JPanel {
         Object obj = myTree.getLastSelectedPathComponent();
         
         if(obj!=null)
+
         {
+			int idObj;
             DefaultMutableTreeNode sel = (DefaultMutableTreeNode)obj;
             // ������� ������� ����������� � �������� � ������������ � ���
             
             if(sel.getLevel()==1) {
                 DefaultMutableTreeNode tmp = new DefaultMutableTreeNode("Название объекта");
                 model.insertNodeInto(tmp, sel, sel.getChildCount());
+
+
             }
             
             if(sel.getLevel()==2) {
@@ -198,8 +204,17 @@ public class MyTree extends JPanel {
 	 
 	 
 	    private void singleClickHandler(ActionEvent e) {
-	    	
-		        System.out.println("-- single click --");	
+
+			DefaultTreeModel model = (DefaultTreeModel)myTree.getModel();
+
+			Object obj = myTree.getLastSelectedPathComponent();
+
+			if (obj != null) {
+				DefaultMutableTreeNode sel = (DefaultMutableTreeNode) obj;
+
+
+			}
+
 	    }
 	 
 	 
