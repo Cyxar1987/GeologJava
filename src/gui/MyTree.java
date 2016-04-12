@@ -1,6 +1,8 @@
 package gui;
 
 
+import conndb.TreeId;
+import conndb.ConnectDB;
 import sun.awt.AWTAccessor;
 
 import java.awt.Color;
@@ -22,10 +24,7 @@ import javax.swing.JTree;
 import javax.swing.Timer;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import javax.swing.tree.*;
 
 public class MyTree extends JPanel {
 	
@@ -33,6 +32,7 @@ public class MyTree extends JPanel {
 	JScrollPane scrollTree;
 	TreePath treePath;
 	JButton jbtAdd, jbtDel;
+    String Mestopolojenie = "Местоположение объекиа";
 	
 	PassportDialog passDial;
 	LitologyDialog litologyDial;
@@ -88,11 +88,12 @@ public class MyTree extends JPanel {
         if(obj!=null)
 
         {
-			int idObj;
             DefaultMutableTreeNode sel = (DefaultMutableTreeNode)obj;
             // ������� ������� ����������� � �������� � ������������ � ���
             
-            if(sel.getLevel()==1) {
+            if(sel.getLevel()==1)
+            {
+
                 DefaultMutableTreeNode tmp = new DefaultMutableTreeNode("Название объекта");
                 model.insertNodeInto(tmp, sel, sel.getChildCount());
 
@@ -113,10 +114,32 @@ public class MyTree extends JPanel {
                 model.insertNodeInto(tmp4, tmp, tmp.getChildCount());
             }
             
-            if(sel.isRoot()) {
-                DefaultMutableTreeNode tmp = new DefaultMutableTreeNode("�������������� �������");
-                model.insertNodeInto(tmp, sel, sel.getChildCount());
-            }
+            if(sel.isRoot())
+            {
+
+			    DefaultMutableTreeNode tmp = new DefaultMutableTreeNode(Mestopolojenie);
+			    model.insertNodeInto(tmp, sel, sel.getChildCount());
+
+                int IdNode = tmp.getParent().getIndex(tmp) + 1;   // Узнаем Id узла
+
+                int IdParent =1;                                  // если sel-это корень, то idParent = 1
+
+                int Level = tmp.getLevel();                      // Узнаем уровень вложенности
+
+                String Name = tmp.toString();                    // Узнаем имя узла
+
+                TreeId Id = new TreeId(IdNode, IdParent, Level, Name);
+
+                //Подключаемся к базе
+                ConnectDB connect = new ConnectDB();
+                try {
+                    connect.Connect();
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Что-то пошло не так!!!");
+                }
+		    }
             
             myTree.expandPath(new TreePath(sel.getPath()));
         }
@@ -205,15 +228,7 @@ public class MyTree extends JPanel {
 	 
 	    private void singleClickHandler(ActionEvent e) {
 
-			DefaultTreeModel model = (DefaultTreeModel)myTree.getModel();
 
-			Object obj = myTree.getLastSelectedPathComponent();
-
-			if (obj != null) {
-				DefaultMutableTreeNode sel = (DefaultMutableTreeNode) obj;
-
-
-			}
 
 	    }
 	 

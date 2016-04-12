@@ -10,12 +10,12 @@ package conndb;
 
 public class ConnectDB {
 
-    public static  Connection conn = null;
-    public static Statement statmt = null;
-    public static ResultSet resSet = null;
+    public  Connection conn = null;
+    public Statement statmt = null;
+    public ResultSet resSet = null;
 
 
-    public static void Connect() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException
+    public void Connect() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException
     {
 
 
@@ -33,7 +33,7 @@ public class ConnectDB {
 
 
     // --------Создание таблицы--------
-    public static void CreateDB() throws ClassNotFoundException, SQLException
+    public void CreateDB() throws ClassNotFoundException, SQLException
     {
         statmt = conn.createStatement();
         statmt.execute("CREATE TABLE if not exists 'users' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text, 'phone' INT);");
@@ -41,7 +41,7 @@ public class ConnectDB {
         System.out.println("Таблица создана или уже существует.");
     }
     // --------Заполнение таблицы--------
-    public static void WriteDB() throws SQLException
+    public void WriteDB() throws SQLException
     {
         statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Petya', 125453); ");
         statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Vasya', 321789); ");
@@ -51,7 +51,7 @@ public class ConnectDB {
 
     }
 
-    public static void ReadDB() throws ClassNotFoundException, SQLException
+    public void ReadDB() throws ClassNotFoundException, SQLException
     {
         resSet = statmt.executeQuery("SELECT * FROM users");
 
@@ -70,7 +70,7 @@ public class ConnectDB {
     }
 
     // --------Закрытие--------
-    public static void CloseDB() throws ClassNotFoundException, SQLException
+    public void CloseDB() throws ClassNotFoundException, SQLException
     {
         conn.close();
         statmt.close();
